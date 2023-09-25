@@ -1,0 +1,5 @@
+---
+syncthing_folder_base: /mnt/files
+syncthing_device_name: OneShot
+
+...

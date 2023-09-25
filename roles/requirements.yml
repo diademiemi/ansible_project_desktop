@@ -1,4 +1,16 @@
 ---
-roles: []
+roles:
+  - name: diademiemi.discord
+  - name: diademiemi.docker
+  - name: diademiemi.flatpak
+  - name: diademiemi.github_cli
+  - name: diademiemi.gitlab_cli
+  - name: diademiemi.helm
+  - name: diademiemi.protonvpn
+  - name: diademiemi.rpi_imager
+  - name: diademiemi.rust
+  - name: diademiemi.solaar
+  - name: diademiemi.syncthing
+  - name: diademiemi.vscode
 
 ...

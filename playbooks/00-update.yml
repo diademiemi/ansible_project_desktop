@@ -1,0 +1,44 @@
+---
+- name: Apt upgrade
+  hosts: ubuntu
+  tags: upgrade
+  tasks:
+    - name: Upgrade all packages
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+        name: '*'
+        state: latest  # noqa: package-latest
+        only_upgrade: true
+
+- name: Set up specific kernel
+  hosts: ubuntu
+  tags: kernel
+  vars:
+    kernel_version: "6.5.4"  # Current latest
+    omit_generic_headers: true  # Not needed for most users, causes libc dependency issues
+  tasks:
+    - name: Fetch latest Kernel checksums
+      ansible.builtin.uri:
+        url: "https://kernel.ubuntu.com/~kernel-ppa/mainline/v{{ kernel_version }}/amd64/CHECKSUMS"
+        return_content: true
+      register: checksums
+
+    - name: Download file for each line after the " # Checksums-Sha256: " line
+      ansible.builtin.get_url:
+        url: "https://kernel.ubuntu.com/~kernel-ppa/mainline/v{{ kernel_version }}/amd64/{{ item.split()[1] }}"
+        dest: "/tmp/{{ item.split()[1] }}"
+        checksum: "sha256:{{ item.split()[0] }}"
+        mode: "0644"
+      loop: "{{ checksums.content.splitlines()[checksums.content.splitlines().index('# Checksums-Sha256:') + 1 :] }}"
+      when: not (item.split()[1] | regex_search('linux-headers-.*generic.*\.deb'))
+      register: kernel_files
+
+    - name: Install kernel packages
+      become: true
+      ansible.builtin.apt:
+        deb: "{{ item }}"
+        state: present
+      loop: "{{ kernel_files.results | rejectattr('skipped', 'defined') | map(attribute='dest') | list }}"
+
+...

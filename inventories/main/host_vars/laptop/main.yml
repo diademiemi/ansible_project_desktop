@@ -1,0 +1,5 @@
+---
+syncthing_folder_base: /home/{{ syncthing_user }}/Files
+syncthing_device_name: Celeste
+
+...

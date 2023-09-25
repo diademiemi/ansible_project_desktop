@@ -1,0 +1,90 @@
+---
+vscode_user: "{{ global_user }}"
+vscode_channel: stable
+vscode_settings: {
+  "window.zoomLevel": 2,
+  "workbench.colorTheme": "GitHub Dark",
+  "editor.fontFamily": "'agave Nerd Font', 'monospace', monospace",
+  "editor.inlineSuggest.enabled": true,
+  "explorer.confirmDragAndDrop": false,
+  "markdown.extension.toc.levels": "1..5",
+  "markdown.preview.doubleClickToSwitchToEditor": false,
+  "redhat.telemetry.enabled": false,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false,
+    "ansible": true
+  },
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "git.autofetch": true,
+  "git.confirmSync": false,
+}
+
+vscode_extensions:
+  # AI stuff
+  - github.copilot
+  - github.copilot-chat
+  - github.copilot-labs
+  # Minecraft related
+  - SPGoding.datapack-language-server
+  # Container related
+  - ms-vscode-remote.remote-containers
+  - ms-azuretools.vscode-docker
+  - exiasr.hadolint
+  - ms-kubernetes-tools.vscode-kubernetes-tools
+  # DevOps
+  - redhat.ansible
+  - hashicorp.terraform
+  - ms-vscode-remote.remote-containers
+  - redhat.vscode-yaml
+  - mechatroner.rainbow-csv
+  - ms-vscode-remote.remote-ssh
+  # CI/CD
+  - github.vscode-github-actions
+  - github.vscode-pull-request-github
+  - gitlab.gitlab-workflow
+  # Preview
+  - bierner.github-markdown-preview
+  # Git
+  - eamodio.gitlens
+  # Themes
+  - github.github-vscode-theme
+
+jetbrains_idea_plugins_user: "{{ global_user }}"
+jetbrains_idea_edition: "IU"
+jetbrains_idea_plugins:
+  - 10233  # Discord Integration
+  - 16209  # Telemetry by Red Hat, dependency for Quarkus :(
+  - 14242  # Quarkus Run Configs
+  - 13234  # Quarkus
+  - 13643  # Monokai Pro Theme
+  - 8327   # Minecraft Development
+  - 15921  # Kubernetes by Red Hat
+  - 17718  # GitHub Copilot
+
+
+jetbrains_goland_plugins_user: "{{ global_user }}"
+jetbrains_goland_plugins:
+  - 10233  # Discord Integration
+  - 17718  # GitHub Copilot
+
+
+jetbrains_clion_plugins_user: "{{ global_user }}"
+jetbrains_clion_plugins:
+  - 10233  # Discord Integration
+  - 17718  # GitHub Copilot
+
+jetbrains_android_studio_plugins_user: "{{ global_user }}"
+jetbrains_android_studio_plugins:
+  - 10233  # Discord Integration
+  - 17718  # GitHub Copilot
+
+jetbrains_pycharm_plugins_user: "{{ global_user }}"
+jetbrains_pycharm_edition: professional
+jetbrains_pycharm_plugins:
+  - 10233  # Discord Integration
+  - 17718  # GitHub Copilot
+
+...

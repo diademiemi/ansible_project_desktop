@@ -1,0 +1,64 @@
+---
+- name: Set up Syncthing
+  hosts: all
+  roles:
+    - { role: diademiemi.syncthing, tags: [syncthing] }
+
+- name: All
+  hosts: all
+  pre_tasks:
+    - name: Install packages
+      become: true
+      ansible.builtin.package:
+        name:
+          - git
+          - curl
+          - wget
+          - unzip
+          - jq
+          - htop
+          - tree
+          - neovim
+          - tmux
+          - zsh
+          - sshpass
+          - python3-pip
+          - podman
+        state: present
+
+    - name: Install Ansible
+      become: true
+      become_user: "{{ global_user }}"
+      ansible.builtin.pip:
+        name:
+          - ansible
+          - ansible-lint
+          - yamllint
+        state: present
+
+  roles:
+    - { role: diademiemi.docker, tags: [docker] }
+    - { role: diademiemi.flatpak, tags: [flatpak] }
+    - { role: diademiemi.github_cli, tags: [github_cli] }
+    - { role: diademiemi.gitlab_cli, tags: [gitlab_cli] }
+    - { role: diademiemi.helm, tags: [helm] }
+    - { role: diademiemi.rust, tags: [rust] }
+    - { role: diademiemi.solaar, tags: [solaar] }
+    - { role: diademiemi.hashicorp.terraform, tags: [terraform] }
+    - { role: diademiemi.hashicorp.vagrant, tags: [vagrant] }
+    - { role: diademiemi.vscode, tags: [ides, vscode] }
+    - { role: diademiemi.jetbrains.idea, tags: [ides, idea] }
+    - { role: diademiemi.jetbrains.pycharm, tags: [ides, pycharm] }
+    - { role: diademiemi.jetbrains.goland, tags: [ides, goland] }
+    - { role: diademiemi.jetbrains.clion, tags: [ides, clion] }
+    - { role: diademiemi.firefox.install, tags: [firefox] }
+
+- name: PC
+  hosts: main
+  roles:
+    - { role: diademiemi.discord, tags: [discord] }
+    - { role: diademiemi.protonvpn, tags: [protonvpn] }
+    # - { role: diademiemi.rpi_imager, tags: [rpi_imager] }  # Todo
+    - { role: diademiemi.jetbrains.android_studio, tags: [ides, android_studio] }
+
+...

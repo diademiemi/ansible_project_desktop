@@ -1,0 +1,10 @@
+---
+rust_rustup_user: "{{ global_user }}"
+rust_rustup_toolchains:
+  - stable
+
+rust_rustup_default_toolchain: "{{ rust_rustup_toolchains[0] }}"
+
+rust_rustup_update: true
+
+...

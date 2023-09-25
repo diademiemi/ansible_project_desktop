@@ -1,0 +1,6 @@
+---
+flatpak_enable_flathub_repo: true
+flatpak_install_kde: true
+flatpak_user: "{{ global_user }}"
+
+...
