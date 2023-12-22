@@ -25,8 +25,8 @@ vscode_settings: {
 vscode_extensions:
   # AI stuff
   - github.copilot
-  - github.copilot-chat
-  - github.copilot-labs
+  # - github.copilot-chat
+  # - github.copilot-labs
   # Minecraft related
   - SPGoding.datapack-language-server
   # Container related
@@ -52,39 +52,41 @@ vscode_extensions:
   # Themes
   - github.github-vscode-theme
 
+# I use my JetBrains account to sync these nowadays
+
 jetbrains_idea_plugins_user: "{{ global_user }}"
 jetbrains_idea_edition: "IU"
-jetbrains_idea_plugins:
-  - 10233  # Discord Integration
-  - 16209  # Telemetry by Red Hat, dependency for Quarkus :(
-  - 14242  # Quarkus Run Configs
-  - 13234  # Quarkus
-  - 13643  # Monokai Pro Theme
-  - 8327   # Minecraft Development
-  - 15921  # Kubernetes by Red Hat
-  - 17718  # GitHub Copilot
+# jetbrains_idea_plugins:
+#   - 10233  # Discord Integration
+#   - 16209  # Telemetry by Red Hat, dependency for Quarkus :(
+#   - 14242  # Quarkus Run Configs
+#   - 13234  # Quarkus
+#   - 13643  # Monokai Pro Theme
+#   - 8327   # Minecraft Development
+#   - 15921  # Kubernetes by Red Hat
+#   - 17718  # GitHub Copilot
 
 
 jetbrains_goland_plugins_user: "{{ global_user }}"
-jetbrains_goland_plugins:
-  - 10233  # Discord Integration
-  - 17718  # GitHub Copilot
+# jetbrains_goland_plugins:
+#   - 10233  # Discord Integration
+#   - 17718  # GitHub Copilot
 
 
 jetbrains_clion_plugins_user: "{{ global_user }}"
-jetbrains_clion_plugins:
-  - 10233  # Discord Integration
-  - 17718  # GitHub Copilot
+# jetbrains_clion_plugins:
+#   - 10233  # Discord Integration
+#   - 17718  # GitHub Copilot
 
 jetbrains_android_studio_plugins_user: "{{ global_user }}"
-jetbrains_android_studio_plugins:
-  - 10233  # Discord Integration
-  - 17718  # GitHub Copilot
+# jetbrains_android_studio_plugins:
+#   - 10233  # Discord Integration
+#   - 17718  # GitHub Copilot
 
 jetbrains_pycharm_plugins_user: "{{ global_user }}"
 jetbrains_pycharm_edition: professional
-jetbrains_pycharm_plugins:
-  - 10233  # Discord Integration
-  - 17718  # GitHub Copilot
+# jetbrains_pycharm_plugins:
+#   - 10233  # Discord Integration
+#   - 17718  # GitHub Copilot
 
 ...

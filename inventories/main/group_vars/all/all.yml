@@ -3,5 +3,6 @@ global_user: "diademiemi"
 
 protonvpn_user: "{{ global_user }}"
 firefox_install_migrate_from_snap: true
+firefox_install_migrate_data_from_snap: false
 
 ...

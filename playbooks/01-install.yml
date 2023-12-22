@@ -5,8 +5,29 @@
     - { role: diademiemi.syncthing, tags: [syncthing] }
 
 - name: All
-  hosts: all
+  hosts: pc, laptop, worklaptop
   pre_tasks:
+    - name: RPMFusion
+      ansible.builtin.include_role:
+        name: diademiemi.rpmfusion
+      when: ansible_distribution == 'Fedora'
+      vars:
+        rpmfusion_free_repository: true
+        rpmfusion_nonfree_repository: true
+
+    - name: Include Pip role
+      ansible.builtin.include_role:
+        name: diademiemi.python.pip
+      vars:
+        python_pip_global_packages:
+          - name: ansible
+          - name: ansible-lint
+          - name: ansible-vault
+          - name: yamllint
+          - name: netaddr
+          - name: PyYAML
+          - name: jmespath
+
     - name: Install packages
       become: true
       ansible.builtin.package:
@@ -22,22 +43,35 @@
           - tmux
           - zsh
           - sshpass
-          - python3-pip
           - podman
+          - autojump
         state: present
 
-    - name: Install Ansible
+    - name: Install desktop packages
       become: true
-      become_user: "{{ global_user }}"
-      ansible.builtin.pip:
+      ansible.builtin.package:
         name:
-          - ansible
-          - ansible-lint
-          - yamllint
+          - konsole
+          - kate
+          - yakuake
+          - gparted
+          - vlc
+          - mpv
+          - lollypop
+          - xkill
+          - xprop
         state: present
+
+  post_tasks:
+    - name: Set shell
+      become: true
+      ansible.builtin.user:
+        name: "{{ global_user }}"
+        shell: /bin/zsh
 
   roles:
-    - { role: diademiemi.docker, tags: [docker] }
+    # - { role: diademiemi.docker, vars: {__role_action: uninstall_old}, tags: [docker]}
+    - { role: diademiemi.docker, vars: {__role_action: setup}, tags: [docker]}
     - { role: diademiemi.flatpak, tags: [flatpak] }
     - { role: diademiemi.github_cli, tags: [github_cli] }
     - { role: diademiemi.gitlab_cli, tags: [gitlab_cli] }
@@ -49,16 +83,115 @@
     - { role: diademiemi.vscode, tags: [ides, vscode] }
     - { role: diademiemi.jetbrains.idea, tags: [ides, idea] }
     - { role: diademiemi.jetbrains.pycharm, tags: [ides, pycharm] }
-    - { role: diademiemi.jetbrains.goland, tags: [ides, goland] }
-    - { role: diademiemi.jetbrains.clion, tags: [ides, clion] }
     - { role: diademiemi.firefox.install, tags: [firefox] }
 
-- name: PC
-  hosts: main
+- name: PC and laptop
+  hosts: pc, laptop
+  tasks:
+    - name: Enable fedora-cisco-openh264
+      become: true
+      ansible.builtin.yum_repository:
+        name: fedora-cisco-openh264
+        description: "Fedora $releasever openh264 (From Cisco) - $basearch"
+        file: fedora-cisco-openh264
+        metalink: "https://mirrors.fedoraproject.org/metalink?repo=fedora-cisco-openh264-$releasever&arch=$basearch"
+        enabled: true
+        gpgcheck: true
+        gpgkey: "/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch"
+        skip_if_unavailable: true
+        metadata_expire: 14d
+      when: ansible_distribution == 'Fedora'
+
+    - name: Remove free ffmpeg
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - ffmpeg-free
+          - ffmpeg-free-devel
+          - libpostproc-free
+          - libswscale-free
+          - libswresample-free
+        state: absent
+
+    - name: Install packages Fedora
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - age
+          - ffmpeg
+          - ffmpeg-devel
+          - openh264
+          - openh264-devel
+          - x264
+          - x264-devel
+          - gstreamer1-plugin-openh264
+          - mozilla-openh264
+          - obs-studio-plugin-x264
+          - obs-studio
+          - obs-studio-libs
+          - openh264
+          - openh264-devel
+          - qt5-qtwebengine-freeworld  # Chromium
+          - android-tools
+          - heimdall-frontend
+          - obs-studio
+          - kdenlive
+          - gimp
+          - kubernetes-client
+          - kvantum
+          - wine
+          - wine-alsa
+          - wine-core
+          - wine-desktop
+          - wine-pulseaudio
+          - winetricks
+        state: present
+      when: ansible_pkg_mgr == 'dnf'
+
+    - name: Install development tools Fedora
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - '@Development tools'
+          - libvirt
+          - virt-manager
+          - java-17-openjdk
+          - java-17-openjdk-devel
+          - maven
+          - gcc
+          - gcc-c++
+          - cmake
+          - extra-cmake-modules
+          - fontconfig-devel
+          - rpmdevtools
+          - rpm-build
+          - rpm-sign
+          - rpmlint
+          - rng-tools
+          - qt5-qtbase-devel
+          - kf5-kio-devel
+        state: present
+      when: ansible_pkg_mgr == 'dnf'
+
+  post_tasks:
+    - name: Add user to groups
+      become: true
+      ansible.builtin.user:
+        name: "{{ global_user }}"
+        groups:
+          - docker
+          - libvirt
+          - kvm
+        append: true
+
+
   roles:
     - { role: diademiemi.discord, tags: [discord] }
     - { role: diademiemi.protonvpn, tags: [protonvpn] }
     # - { role: diademiemi.rpi_imager, tags: [rpi_imager] }  # Todo
     - { role: diademiemi.jetbrains.android_studio, tags: [ides, android_studio] }
+    - { role: diademiemi.jetbrains.goland, tags: [ides, goland] }
+    - { role: diademiemi.jetbrains.clion, tags: [ides, clion] }
+    # - { role: diademiemi.steam, tags: [steam] }
 
 ...

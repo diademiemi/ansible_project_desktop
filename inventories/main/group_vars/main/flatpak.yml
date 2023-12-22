@@ -1,5 +1,7 @@
 ---
 flatpak_packages:
   - "org.prismlauncher.PrismLauncher"
+  - "org.DolphinEmu.dolphin-emu"
+  - "org.raspberrypi.rpi-imager"
 
 ...

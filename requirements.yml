@@ -1,4 +1,10 @@
 ---
+collections:
+  - name: diademiemi.firefox
+  - name: diademiemi.jetbrains
+  - name: diademiemi.python
+  - name: diademiemi.hashicorp
+
 roles:
   - name: diademiemi.discord
   - name: diademiemi.docker
@@ -12,5 +18,6 @@ roles:
   - name: diademiemi.solaar
   - name: diademiemi.syncthing
   - name: diademiemi.vscode
+  - name: diademiemi.rpmfusion
 
 ...
