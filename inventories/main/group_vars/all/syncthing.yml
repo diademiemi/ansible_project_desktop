@@ -2,7 +2,7 @@
 syncthing_user: "{{ global_user }}"
 syncthing_configure: true
 
-syncthing_version: v1.27.1
+syncthing_version: v1.27.4
 
 syncthing_folder_defaults: # Will be used if missing from folder
   path: "{{ syncthing_folder_base }}"
