@@ -69,6 +69,22 @@
         name: "{{ global_user }}"
         shell: /bin/zsh
 
+    - name: Add to groups
+      become: true
+      ansible.builtin.user:
+        name: "{{ global_user }}"
+        groups:
+          - wheel
+          - video
+          - audio
+          - input
+          - network
+          - storage
+          - power
+          - users
+          - libvirt
+        append: true
+
   roles:
     # - { role: diademiemi.docker, vars: {__role_action: uninstall_old}, tags: [docker]}
     - { role: diademiemi.docker, vars: {__role_action: setup}, tags: [docker]}
@@ -160,6 +176,9 @@
           - maven
           - gcc
           - gcc-c++
+          - gcc-c++-arm-linux-gnu
+          - arm-none-eabi-gcc-cs
+          - arm-none-eabi-gcc-cs-c++
           - cmake
           - extra-cmake-modules
           - fontconfig-devel
