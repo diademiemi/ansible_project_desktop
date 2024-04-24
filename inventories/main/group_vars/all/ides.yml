@@ -3,7 +3,7 @@ vscode_user: "{{ global_user }}"
 vscode_channel: stable
 vscode_settings: {
   "window.zoomLevel": 2,
-  "workbench.colorTheme": "GitHub Dark",
+  "workbench.colorTheme": "Catppuccin Mocha",
   "editor.fontFamily": "'agave Nerd Font', 'monospace', monospace",
   "editor.inlineSuggest.enabled": true,
   "explorer.confirmDragAndDrop": false,
@@ -25,10 +25,10 @@ vscode_settings: {
 vscode_extensions:
   # AI stuff
   - github.copilot
-  # - github.copilot-chat
-  # - github.copilot-labs
+  - github.copilot-chat
   # Minecraft related
   - SPGoding.datapack-language-server
+  - superant.mc-dp-icons
   # Container related
   - ms-vscode-remote.remote-containers
   - ms-azuretools.vscode-docker
@@ -47,46 +47,56 @@ vscode_extensions:
   - gitlab.gitlab-workflow
   # Preview
   - bierner.github-markdown-preview
+  # openSCAD
+  - antyos.openscad
+  - leathong.openscad-language-support
   # Git
   - eamodio.gitlens
+  # Remote coding
+  - ms-vscode-remote.remote-ssh-edit
+  - ms-vscode-remote.remote-ssh
+  # Syntax
+  - mechatroner.rainbow-csv
   # Themes
-  - github.github-vscode-theme
+  - Catppuccin.catppuccin-vsc
 
-# I use my JetBrains account to sync these nowadays
-
+# I use my JetBrains account to sync these nowadays too
 jetbrains_idea_plugins_user: "{{ global_user }}"
 jetbrains_idea_edition: "IU"
-# jetbrains_idea_plugins:
-#   - 10233  # Discord Integration
-#   - 16209  # Telemetry by Red Hat, dependency for Quarkus :(
-#   - 14242  # Quarkus Run Configs
-#   - 13234  # Quarkus
-#   - 13643  # Monokai Pro Theme
-#   - 8327   # Minecraft Development
-#   - 15921  # Kubernetes by Red Hat
-#   - 17718  # GitHub Copilot
-
+jetbrains_idea_plugins:
+  - 16209  # Telemetry by Red Hat, dependency for Quarkus :(
+  - 14242  # Quarkus Run Configs
+  - 13234  # Quarkus
+  - 8327   # Minecraft Development
+  - 15921  # Kubernetes by Red Hat
+  - 17718  # GitHub Copilot
+  - 23029  # Catppuccin Theme
+  - 23029  # Catppuccin Icons
 
 jetbrains_goland_plugins_user: "{{ global_user }}"
-# jetbrains_goland_plugins:
-#   - 10233  # Discord Integration
-#   - 17718  # GitHub Copilot
+jetbrains_goland_plugins:
+  - 17718  # GitHub Copilot
+  - 23029  # Catppuccin Theme
+  - 23029  # Catppuccin Icons
 
 
 jetbrains_clion_plugins_user: "{{ global_user }}"
-# jetbrains_clion_plugins:
-#   - 10233  # Discord Integration
-#   - 17718  # GitHub Copilot
+jetbrains_clion_plugins:
+  - 17718  # GitHub Copilot
+  - 23029  # Catppuccin Theme
+  - 23029  # Catppuccin Icons
 
 jetbrains_android_studio_plugins_user: "{{ global_user }}"
-# jetbrains_android_studio_plugins:
-#   - 10233  # Discord Integration
-#   - 17718  # GitHub Copilot
+jetbrains_android_studio_plugins:
+  - 17718  # GitHub Copilot
+  - 23029  # Catppuccin Theme
+  - 23029  # Catppuccin Icons
 
 jetbrains_pycharm_plugins_user: "{{ global_user }}"
 jetbrains_pycharm_edition: professional
-# jetbrains_pycharm_plugins:
-#   - 10233  # Discord Integration
-#   - 17718  # GitHub Copilot
+jetbrains_pycharm_plugins:
+  - 17718  # GitHub Copilot
+  - 23029  # Catppuccin Theme
+  - 23029  # Catppuccin Icons
 
 ...

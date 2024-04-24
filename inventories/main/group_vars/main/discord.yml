@@ -24,5 +24,9 @@ discord_betterdiscord_themes:
     name: HorizontalServerList
   - url: https://raw.githubusercontent.com/maenDisease/BetterDiscordStuff/main/Themes/Float/zFloat.theme.css
     name: zFloat
+  - url: https://raw.githubusercontent.com/maenDisease/BetterDiscordStuff/main/Themes/Float/zFloat.theme.css
+    name: zFloat
+  - url: https://raw.githubusercontent.com/catppuccin/discord/main/themes/mocha.theme.css
+    name: mocha
 
 ...
